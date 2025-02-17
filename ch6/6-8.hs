@@ -1,6 +1,3 @@
-import Data.Time.Calendar.Julian (addJulianDurationClip)
-import System.Posix (otherExecuteMode)
-
 -- 1
 fac :: Int -> Int
 fac n
@@ -38,7 +35,7 @@ myConcat (xs : xxs) = xs ++ myConcat xxs
 
 myReplicate :: Int -> a -> [a]
 myReplicate 0 _ = []
-myReplicate n a = a : (myReplicate (n - 1) a)
+myReplicate n a = a : myReplicate (n - 1) a
 
 (!!!) :: [a] -> Int -> a
 (x : xs) !!! n
@@ -70,8 +67,9 @@ msort :: (Ord a) => [a] -> [a]
 msort [] = []
 msort [x] = [x]
 msort xs =
-    let (a, b) = halve xs
-     in merge (msort a) (msort b)
+    merge (msort a) (msort b)
+  where
+    (a, b) = halve xs
 
 -- 9
 mySum :: (Num a) => [a] -> a
